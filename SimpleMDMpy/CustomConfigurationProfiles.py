@@ -19,9 +19,9 @@ class CustomConfigurationProfiles(SimpleMDMpy.SimpleMDM.Connection):
     def create_profile(self, name, mobileconfig, user_scope=None, attribute_support=False):
         """upload a config file"""
         url = self.url
+        data = {'name': name}
         with open(mobileconfig, 'rb') as f:
             mobileconfig_contents = f
-        data = {'name': name}
         files = {'mobileconfig': mobileconfig_contents}
         if user_scope:
             data['user_scope'] = user_scope
