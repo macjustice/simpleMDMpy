@@ -20,7 +20,9 @@ class PushCertificate(SimpleMDMpy.SimpleMDM.Connection):
     def update_certificate(self, file, apple_id):
         """Upload a new certificate and replace the
         existing certificate for your account."""
-        files = {'file': open(file, 'rb')}
+        with open(file, 'rb')} as f:
+            cert_contents = f
+        files = {'file': cert_contents}
         data = {}
         if apple_id:
             data["apple_id"] = apple_id
