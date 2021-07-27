@@ -29,8 +29,7 @@ class Apps(SimpleMDMpy.SimpleMDM.Connection):
         elif bundle_id:
             data['bundle_id'] = bundle_id
         elif binary:
-            with open(binary, 'rb') as f:
-                files['binary'] = f
+            files['binary'] = open(binary, 'rb')
         return self._post_data(self.url, data, files)
 
     def update_app(self, app_id, binary=None, name=None):
@@ -41,8 +40,7 @@ class Apps(SimpleMDMpy.SimpleMDM.Connection):
         if name:
             data['name'] = name
         if binary:
-            with open(binary, 'rb') as f:
-                files['binary'] = f
+            files['binary'] = open(binary, 'rb')
         return self._patch_data(url, data, files)
 
     def delete_app(self, app_id):
