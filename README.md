@@ -14,6 +14,11 @@ Your SimpleMDM API key will need to be set as an environmental variable `api_key
 
 Help available via `help(SimpleMDMpy)`
 
+## Sample Projects
+
+* [Making SimpleMDM Complicated](https://github.com/lucasjhall/CONF-2021_MDO_YVR-Making_SimpleMDM_Complicated)
+* [SimpleCLI](https://github.com/MagerValp/SimpleCLI)
+
 ## Available Modules
 
 ### Account
@@ -179,7 +184,6 @@ class CustomAttributes(SimpleMDMpy.SimpleMDM.Connection)
 <!-- TODO: Custom Configuration -->
 
 ### Custom Configuration Profiles
-<!-- TODO: DOWNLOAD PROFILE -->
 ```python
 class CustomConfigurationProfiles(SimpleMDMpy.SimpleMDM.Connection)
  |  work with custom profiles
@@ -196,6 +200,9 @@ class CustomConfigurationProfiles(SimpleMDMpy.SimpleMDM.Connection)
  |
  |  delete_profile(self, profile_id)
  |      deletes custom profile
+ |
+ |  download_profile(self, profile_id)
+ |      downloads custom profile
  |
  |  get_profiles(self)
  |      returns profiles
@@ -258,9 +265,10 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection)
  |  get_custom_attribute(self, device_id, custom_attribute_name)
  |      get a devices custom attributes
  |
- |  get_device(self, device_id='all', search=None)
+ |  get_device(self, device_id='all', search=None, include_awaiting_enrollment=False)
  |      Returns a device specified by id. If no ID or search is
- |      specified all devices will be returned
+ |      specified all devices will be returned. Default does not include devices
+ |      waiting for enrollment
  |
  |  list_installed_apps(self, device_id)
  |      Returns a listing of the apps installed on a device.
@@ -288,7 +296,7 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection)
  |  shutdown_device(self, device_id)
  |      This command sends a shutdown command to the device.
  |
- |  update_device(self, name, device_id)
+ |  update_device(self, device_id, name=None, device_name=None)
  |      Update the SimpleMDM name or device name of a device object.
  |
  |  update_os(self, device_id)
@@ -374,7 +382,7 @@ class Logs(SimpleMDMpy.SimpleMDM.Connection)
  |
  |  __init__(self, api_key)
  |
- |  get_logs(self)
+ |  get_logs(self, starting_after=None, limit=None)
  |      And I mean all the LOGS, before pagination
  |
 
