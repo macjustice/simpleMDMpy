@@ -96,12 +96,16 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
         data = {}
         return self._post_data(url, data)
 
-    def lock_device(self, device_id, message, phone_number, pin=None):
+    def lock_device(self, device_id, message, phone_number, pin: int = None):
         """You can use this method to lock a device and optionally display
         a message and phone number. The device can be unlocked with the
         existing passcode of the device."""
+
+        if len(str(pin)) != 6:
+            raise SimpleMDMpy.SimpleMDM.ApiError("Six digit lock pin required")
+
         url = self.url + "/" + str(device_id) + "/lock"
-        data = {'message': message, 'phone_number': phone_number, 'pin':pin}
+        data = {'message': message, 'phone_number': phone_number, 'pin': pin}
         return self._post_data(url, data)
 
     def clear_passcode_device(self, device_id):
