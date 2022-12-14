@@ -101,7 +101,7 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
         a message and phone number. The device can be unlocked with the
         existing passcode of the device."""
 
-        if len(str(pin)) != 6:
+        if pin != None and len(str(pin)) != 6:
             raise SimpleMDMpy.SimpleMDM.ApiError("Six digit lock pin required")
 
         url = self.url + "/" + str(device_id) + "/lock"
